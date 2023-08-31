@@ -2,19 +2,15 @@
 
 namespace App\Http\Livewire\Review;
 
+use App\Models\Review;
 use Livewire\Component;
 
 class Index extends Component
 {
-    public $pageTitle;
-
-    public function mount()
-    {
-        $this->pageTitle = __('review');
-    }
 
     public function render()
     {
-        return view('livewire.review.index')->layout('layouts.front');
+        $reviews = Review::select('user_id', 'body', 'ratings')->get();
+        return view('livewire.review.index', compact('reviews'))->layout('layouts.front');
     }
 }

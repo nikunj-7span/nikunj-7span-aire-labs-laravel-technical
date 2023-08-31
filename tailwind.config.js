@@ -5,7 +5,12 @@ export default {
     './resources/views/**/*.blade.php',
   ],
   theme: {
-    extend: {},
+    extend: {
+        backgroundImage: {
+            "desktop-bg": "url('/svg/desktop_view.svg')",
+            "mobile-bg": "url('/svg/mobile_view.svg')",
+          },
+    },
   },
   plugins: [],
 }

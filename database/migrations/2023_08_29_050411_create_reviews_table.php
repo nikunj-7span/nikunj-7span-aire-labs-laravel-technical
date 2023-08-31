@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->text('body');
-            $table->integer('ratings');
+            $table->integer('ratings')->default(0);
             $table->timestamps();
         });
     }

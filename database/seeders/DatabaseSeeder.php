@@ -15,7 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if (app()->isLocal()) {
-            User::factory(10)->create();
+            User::factory(6)->create();
+
+            $this->call([
+                ReviewSeeder::class
+            ]);
         }
     }
 }

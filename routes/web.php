@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/reviews', \App\Http\Livewire\Review\Index::class)->name('review.index');
+Route::get('/reviews', \App\Http\Livewire\Review\Index::class);

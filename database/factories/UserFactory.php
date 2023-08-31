@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class UserFactory extends Factory
 {
+    protected static $usedImages = [];
     /**
      * Define the model's default state.
      *
@@ -18,8 +20,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $imageDirectory = storage_path('app/public/images');
-        $images = glob($imageDirectory . '/*.jpg');
-        $randomImagePath = $images[array_rand($images)];
+        $images = File::glob($imageDirectory . '/*.{jpg,jpeg,png}', GLOB_BRACE);
+        $availableImages = array_diff($images, static::$usedImages);
+
+        if (empty($availableImages)) {
+            static::$usedImages = [];
+            $availableImages = $images;
+        }
+
+        $randomImagePath = $availableImages[array_rand($availableImages)];
+        static::$usedImages[] = $randomImagePath;
 
         return [
             'name' => fake()->name(),
@@ -28,7 +38,7 @@ class UserFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
             'type' => fake()->randomElement(['Founder', 'CEO', 'Consultant']),
-            'avatar' =>  'images/' . basename($randomImagePath)
+            'avatar' => 'images/' . basename($randomImagePath),
         ];
     }
 
