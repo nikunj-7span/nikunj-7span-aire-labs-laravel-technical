@@ -13,8 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/reviews', \App\Http\Livewire\Review\Index::class);
+Route::get('/', \App\Http\Livewire\Review\Index::class);
