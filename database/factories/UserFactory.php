@@ -19,8 +19,9 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $imageDirectory = storage_path('app/public/images');
+        $imageDirectory = public_path('images');
         $images = File::glob($imageDirectory . '/*.{jpg,jpeg,png}', GLOB_BRACE);
+
         $availableImages = array_diff($images, static::$usedImages);
 
         if (empty($availableImages)) {

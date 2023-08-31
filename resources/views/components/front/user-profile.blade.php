@@ -2,7 +2,7 @@
 <div class="flex gap-4">
     @if (!empty($userreview))
         <div class="w-11 h-11 aspect-square rounded-full overflow-hidden">
-            <img src="{{ asset('storage/' . $userreview->avatar) }}" alt="user"
+            <img src="{{ asset($userreview->avatar) }}" alt="user"
                 class="pc-h-full pc-w-full pc-rounded-full pc-object-cover pc-object-center" />
         </div>
         <div class="space-y-1">
